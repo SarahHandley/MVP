@@ -12,6 +12,7 @@ const App = () => {
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
+  const [userId, setUserId] = useState(0);
 
   const getSongs = () => {
     return axios.get('/songs')
@@ -45,6 +46,12 @@ const App = () => {
       let newSongsList = songs.slice();
       newSongsList.splice(songId, 1, newSelectedSong);
       setSongs(newSongsList);
+
+      return axios.post('/song', {
+        userId: userId,
+        songId: (Number(songId) + 1)
+      })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -75,9 +82,7 @@ const App = () => {
   useEffect(() => {
     if (email !== '') {
       return axios.post('/user', {user: email})
-        .then((res) => {
-          document.cookie = `id=${res.data.id}`;
-        })
+        .then((res) => setUserId(res.data.id))
         .catch((err) => console.log(err));
     }
   }, [email]);

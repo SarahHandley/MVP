@@ -91,8 +91,16 @@ const addUser = (email) => {
     .catch((err) => console.log(err));
 };
 
+const addSong = ({ userId, songId }) => {
+  return db.queryAsync(`
+  INSERT INTO playlist_songs (id, user_id, song_id)
+  VALUES (default, ${userId}, ${songId});`)
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   db,
   getSongs,
-  addUser
+  addUser,
+  addSong
 };

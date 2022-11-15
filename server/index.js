@@ -4,6 +4,7 @@ const axios = require('axios');
 const db = require('../db/index.js').db;
 const getSongs = require('../db/index.js').getSongs;
 const addUser = require('../db/index.js').addUser;
+const addSong = require('../db/index.js').addSong;
 
 const app = express();
 
@@ -22,6 +23,16 @@ app.post('/user', (req, res) => {
   return addUser(req.body.user)
     .then((id) => res.send({'id': id}))
     .catch((err) => console.log(err));
+});
+
+app.post('/song', (req, res) => {
+  return addSong(req.body)
+    .then(() => res.end())
+    .catch((err) => console.log(err));
+});
+
+app.delete('/song', (req, res) => {
+  console.log(req.body);
 });
 
 app.listen(process.env.PORT, () => {
