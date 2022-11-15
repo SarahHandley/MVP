@@ -21,8 +21,7 @@ const App = () => {
     setCurrentSong(songs[songId]);
     if (currentSong.length !== 0) {
       let audioPlaying = document.getElementsByClassName('audio');
-      audioPlaying[0].pause();
-      audioPlaying[0].load();
+      audioPlaying[0].pause().load();
     }
   };
 
