@@ -111,6 +111,11 @@ h6 {
   border-radius: 50%;
 }
 
+.check-icon {
+  margin: 5px;
+  margin-bottom: 0;
+}
+
 #add-songs-notice {
   display: flex;
   justify-content: center;

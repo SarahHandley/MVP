@@ -19,6 +19,7 @@ app.get('/songs', (req, res) => {
         song.push(songObj.name['name-USen']);
         song.push(songObj['music_uri']);
         song.push(songObj['image_uri']);
+        song.push(false);
         songs.push(song);
       })
       res.send(songs);

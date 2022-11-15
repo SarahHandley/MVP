@@ -16,13 +16,28 @@ const App = () => {
   };
 
   const addSongToSelected = (songId) => {
-    setSelectedSongs([...selectedSongs, songs[songId]]);
+    if (!songs[songId][3]) {
+      let newSelectedSong = songs[songId].slice();
+      newSelectedSong.splice(3, 1, true);
+      setSelectedSongs([...selectedSongs, newSelectedSong.concat(songId)]);
+
+      let newSongsList = songs.slice();
+      newSongsList.splice(songId, 1, newSelectedSong);
+      setSongs(newSongsList);
+    }
   };
 
   const removeSongFromSelected = (selectedSongId) => {
     let newSelectedSongsList = selectedSongs.slice();
     newSelectedSongsList.splice(selectedSongId, 1);
     setSelectedSongs(newSelectedSongsList);
+
+    let unselectedSong = selectedSongs[selectedSongId];
+    let id = unselectedSong[4];
+    unselectedSong.splice(3, 2, false);
+    let newSongsList = songs.slice();
+    newSongsList.splice(id, 1, unselectedSong);
+    setSongs(newSongsList);
   };
 
   useEffect(() => {
