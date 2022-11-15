@@ -1,9 +1,9 @@
 import React from 'react';
 
-const SongListItem = ({ song, addSongToSelected, id }) => {
+const SongListItem = ({ song, addSongToSelected, handleClickAlbum, id }) => {
   return(
     <div className='song'>
-      <img src={song[2]} width='175px' height='175px'></img>
+      <img src={song[2]} width='175px' height='175px' className={id} onClick={(e) => handleClickAlbum(e.target.className)}></img>
       <div className='song-name'>
         <div> {song[0]} </div>
         {song[3] ?

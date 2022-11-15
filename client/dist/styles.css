@@ -172,3 +172,37 @@ h6 {
   margin-left: 10px;
   margin-top: 18px;
 }
+
+#audio-player-container {
+  height: 550px;
+  width: 500px;
+  background-color: #1E212D;
+  padding: 35px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+#audio-player {
+  background-color: #111219;
+  margin-top: 15px;
+  padding: 20px;
+}
+
+#audio-header {
+  display: flex;
+}
+
+#audio-header img {
+  margin: 20px 20px 20px 0;
+}
+
+#audio-header div {
+  margin: 120px 20px 20px 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.audio {
+  margin: 10px;
+  width: 370px;
+}

@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import SongList from './SongList.jsx';
 import SelectedSongList from './SelectedSongList.jsx';
+import CurrentlyPlaying from './CurrentlyPlaying.jsx';
 
 const { useState, useEffect } = React;
 
 const App = () => {
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
-  const [currentSong, setCurrentSong] = useState('');
+  const [currentSong, setCurrentSong] = useState([]);
 
   const getSongs = () => {
     return axios.get('/songs')
@@ -16,8 +17,22 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleClickPlayInPlaylist = (selectedSongId) => {
-    setCurrentSong(selectedSongs[selectedSongId][1]);
+  const handleClickAlbum = (songId) => {
+    setCurrentSong(songs[songId]);
+    if (currentSong.length !== 0) {
+      let audioPlaying = document.getElementsByClassName('audio');
+      audioPlaying[0].pause();
+      audioPlaying[0].load();
+    }
+  };
+
+  const handleClickPlay = (selectedSongId) => {
+    setCurrentSong(selectedSongs[selectedSongId]);
+    if (currentSong.length !== 0) {
+      let audioPlaying = document.getElementsByClassName('audio');
+      audioPlaying[0].pause();
+      audioPlaying[0].load();
+    }
   };
 
   const addSongToSelected = (songId) => {
@@ -49,6 +64,13 @@ const App = () => {
     getSongs();
   }, []);
 
+  useEffect(() => {
+    if (currentSong.length !== 0) {
+      let audioPlaying = document.getElementsByClassName('audio');
+      audioPlaying[0].play();
+    }
+  }, [currentSong]);
+
   return(
   <div>
     <div id='heading'>
@@ -56,14 +78,11 @@ const App = () => {
       <img id='isabelle-photo' src='isabelle_jammin.jpeg' height='250px'></img>
     </div>
     <div id='songs-container'>
-      <SongList songs={songs} addSongToSelected={addSongToSelected}/>
+      <SongList songs={songs} addSongToSelected={addSongToSelected} handleClickAlbum={handleClickAlbum}/>
       <div id='right-songs-container'>
-        <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlayInPlaylist={handleClickPlayInPlaylist}/>
-        {currentSong !== '' &&
-          <audio controls>
-            <source src={currentSong} type='audio/mp3'></source>
-            Your browser does not support audio.
-          </audio>
+        <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlay={handleClickPlay}/>
+        {currentSong.length !== 0 &&
+          <CurrentlyPlaying currentSong={currentSong}/>
         }
       </div>
     </div>
