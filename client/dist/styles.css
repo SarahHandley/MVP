@@ -151,6 +151,17 @@ h6 {
   margin: 6px;
 }
 
+.play-icon {
+  background-color: #B68973;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  padding: 4.5px;
+  padding-left: 7.5px;
+  margin-left: 100px;
+  margin-top: 18px;
+}
+
 .remove-icon {
   background-color: #B68973;
   border-radius: 50%;
@@ -158,6 +169,6 @@ h6 {
   width: 25px;
   padding: 4.5px;
   padding-left: 7.5px;
-  margin-left: 125px;
+  margin-left: 10px;
   margin-top: 18px;
 }

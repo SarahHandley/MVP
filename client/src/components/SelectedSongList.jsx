@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SelectedSongList = ({ selectedSongs, removeSongFromSelected }) => {
+const SelectedSongList = ({ selectedSongs, removeSongFromSelected, handleClickPlayInPlaylist }) => {
   return(
     <div className='selected-songs-container'>
       <h2 className='subtitle'> My Songs </h2>
@@ -14,6 +14,7 @@ const SelectedSongList = ({ selectedSongs, removeSongFromSelected }) => {
               <div className='song-name'>
                 <div> {song[0]} </div>
               </div>
+              <i className={`play-icon fa-solid fa-play ${i}`} onClick={(e) => handleClickPlayInPlaylist(e.target.className.slice(27))}></i>
               <i className={`remove-icon fa-solid fa-xmark ${i}`} onClick={(e) => removeSongFromSelected(e.target.className.slice(30))}></i>
             </div>
           )

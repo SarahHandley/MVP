@@ -8,11 +8,16 @@ const { useState, useEffect } = React;
 const App = () => {
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
+  const [currentSong, setCurrentSong] = useState('');
 
   const getSongs = () => {
     return axios.get('/songs')
       .then((response) => setSongs(response.data))
       .catch((err) => console.log(err));
+  };
+
+  const handleClickPlayInPlaylist = (selectedSongId) => {
+    setCurrentSong(selectedSongs[selectedSongId][1]);
   };
 
   const addSongToSelected = (songId) => {
@@ -52,7 +57,15 @@ const App = () => {
     </div>
     <div id='songs-container'>
       <SongList songs={songs} addSongToSelected={addSongToSelected}/>
-      <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected}/>
+      <div id='right-songs-container'>
+        <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlayInPlaylist={handleClickPlayInPlaylist}/>
+        {currentSong !== '' &&
+          <audio controls>
+            <source src={currentSong} type='audio/mp3'></source>
+            Your browser does not support audio.
+          </audio>
+        }
+      </div>
     </div>
   </div>);
 };
