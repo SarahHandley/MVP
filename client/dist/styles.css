@@ -17,6 +17,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background-color: #B68973;
+  color: #FAF3E0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 img,
@@ -43,4 +48,111 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+#heading {
+  background-color: #1E212D;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1400px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+#title {
+  font-size: 80px;
+  margin: 20px;
+}
+
+#isabelle-photo {
+  margin: 20px;
+}
+
+#songs-container {
+  display: flex;
+}
+
+.song-list-container {
+  background-color: #1E212D;
+  padding: 35px;
+  width: 885px;
+}
+
+.subtitle {
+  font-size: 50px;
+}
+
+#song-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 885px;
+}
+
+.song {
+  min-height: 200px;
+  min-width: 200px;
+  margin: 5px;
+  margin-bottom: 15px;
+}
+
+.song-name {
+  font-weight: 600;
+  padding: 5px;
+  margin-top: 3px;
+  display: flex;
+  width: 180px;
+  justify-content: space-between;
+}
+
+.icon {
+  background-color: #B68973;
+  padding: 4px 5px;
+  border-radius: 50%;
+}
+
+#add-songs-notice {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  margin-top: 55px;
+}
+
+.selected-songs-container {
+  background-color: #1E212D;
+  padding: 35px;
+  margin-left: 15px;
+  width: 500px;
+  min-height: 500px;
+  align-self: flex-start;
+}
+
+#selected-song-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-song {
+  display: flex;
+  margin: 5px;
+  background-color: #111219;
+}
+
+.selected-song img {
+  margin: 5px;
+}
+
+.selected-song div {
+  margin: 6px;
+}
+
+.remove-icon {
+  background-color: #B68973;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  padding: 4.5px;
+  padding-left: 7.5px;
+  margin-left: 125px;
+  margin-top: 18px;
 }
