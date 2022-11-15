@@ -65,7 +65,34 @@ const getSongs = () => {
     })
 };
 
+const addUser = (email) => {
+  return db.queryAsync(`
+  SELECT exists(
+  SELECT id FROM users
+  WHERE email = $$${email}$$);
+  `)
+    .then((data) => {
+      if (!data[0].rows[0].exists) {
+        return db.queryAsync(`
+        INSERT INTO users (id, email)
+        VALUES (default, $$${email}$$);
+        `);
+      }
+    })
+    .then(() => {
+      return db.queryAsync(`
+      SELECT id FROM users
+      WHERE email = $$${email}$$;
+      `);
+    })
+    .then((data) => {
+      return(data[0].rows[0].id);
+    })
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   db,
-  getSongs
+  getSongs,
+  addUser
 };

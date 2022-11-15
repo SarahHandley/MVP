@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import LogIn from './LogIn.jsx';
 import SongList from './SongList.jsx';
 import SelectedSongList from './SelectedSongList.jsx';
 import CurrentlyPlaying from './CurrentlyPlaying.jsx';
@@ -7,6 +8,7 @@ import CurrentlyPlaying from './CurrentlyPlaying.jsx';
 const { useState, useEffect } = React;
 
 const App = () => {
+  const [email, setEmail] = useState('');
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
@@ -70,21 +72,37 @@ const App = () => {
     }
   }, [currentSong]);
 
+  useEffect(() => {
+    if (email !== '') {
+      return axios.post('/user', {user: email})
+        .then((res) => {
+          document.cookie = `id=${res.data.id}`;
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [email]);
+
   return(
   <div>
-    <div id='heading'>
-      <h1 id='title'> Animal Crossing Playlist </h1>
-      <img id='isabelle-photo' src='isabelle_jammin.jpeg' height='250px'></img>
-    </div>
-    <div id='songs-container'>
-      <SongList songs={songs} addSongToSelected={addSongToSelected} handleClickAlbum={handleClickAlbum}/>
-      <div id='right-songs-container'>
-        <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlay={handleClickPlay}/>
-        {currentSong.length !== 0 &&
-          <CurrentlyPlaying currentSong={currentSong}/>
-        }
+    {email === '' ?
+      <LogIn setEmail={setEmail}/>
+      :
+      <div>
+        <div id='heading'>
+          <h1 id='title'> Animal Crossing Playlist </h1>
+          <img id='isabelle-photo' src='isabelle_jammin.jpeg' height='250px'></img>
+        </div>
+        <div id='songs-container'>
+          <SongList songs={songs} addSongToSelected={addSongToSelected} handleClickAlbum={handleClickAlbum}/>
+          <div id='right-songs-container'>
+            <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlay={handleClickPlay}/>
+            {currentSong.length !== 0 &&
+              <CurrentlyPlaying currentSong={currentSong}/>
+            }
+          </div>
+        </div>
       </div>
-    </div>
+    }
   </div>);
 };
 
