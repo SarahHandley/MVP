@@ -2,6 +2,9 @@ require('dotenv').config();
 const { Client } = require('pg');
 const Promise = require('bluebird');
 const axios = require('axios');
+const songLinks = require('./songLinks');
+const imageLinkKeys = require('./imageLinkKeys');
+const songNames = require('./songNames');
 
 const config = {
   host: process.env.HOST,
@@ -22,20 +25,13 @@ db.connectAsync()
   `))
   .then((data) => {
     if (!data[0].rows[0].exists) {
-      return axios.get('http://acnhapi.com/v1/songs');
-    }
-  })
-  .then((res) => {
-    if (res !== undefined) {
       let query = 'INSERT INTO songs (id, name, music_uri, image_uri) VALUES ';
-      let songKeys = Object.keys(res.data);
-      songKeys.forEach((key, i) => {
-        let songObj = res.data[key];
-        let name = songObj.name['name-USen'];
-        let music = `https://cdn.nookazon.com/nookazon/Audio/${key}.png`;
-        let image = songObj['image_uri'];
+      imageLinkKeys.forEach((key, i) => {
+        let name = songNames[i];
+        let music = songLinks[i];
+        let image = `https://cdn.nookazon.com/nookazon/Audio/${key}.png`;
         query += `(default, $$${name}$$, $$${music}$$, $$${image}$$)`;
-        if (i !== songKeys.length - 1) {
+        if (i !== imageLinkKeys.length - 1) {
           query += ', ';
         } else {
           query += ';';
