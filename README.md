@@ -27,6 +27,14 @@ npm install
 
 Refactor example.env file as directed.
 
+### Seeding Database
+
+Execute config file from the command line by typing:
+```sh
+psql postgres < db/config.sql
+```
+to create the database and the tables.
+
 ### Running App In Development
 
 From within the root directory:
