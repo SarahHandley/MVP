@@ -32,8 +32,7 @@ db.connectAsync()
       songKeys.forEach((key, i) => {
         let songObj = res.data[key];
         let name = songObj.name['name-USen'];
-        let music = `ACNHSongCovers/${i + 1}.png`;
-        console.log(music);
+        let music = `https://cdn.nookazon.com/nookazon/Audio/${key}.png`;
         let image = songObj['image_uri'];
         query += `(default, $$${name}$$, $$${music}$$, $$${image}$$)`;
         if (i !== songKeys.length - 1) {

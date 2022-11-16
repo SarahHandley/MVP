@@ -1,7 +1,7 @@
 # Animal Crossing Playlist
 Hack Reactor MVP Project
 
-> This is a web application that uses the ACNH API (http://acnhapi.com) songs to allow users to create an Animal Crossing New Horizons playlist.
+> This is a web application that uses the ACNH API's list of songs (http://acnhapi.com) to allow users to create an Animal Crossing New Horizons playlist.
 
 
 ## Table of Contents
