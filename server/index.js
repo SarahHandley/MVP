@@ -13,9 +13,9 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/songs', (req, res) => {
-  return getSongs()
-    .then((songs) => res.send(songs))
+app.get('/songs/:userId', (req, res) => {
+  return getSongs(req.params.userId)
+    .then((results) => res.send(results))
     .catch((err) => console.log(err));
 });
 

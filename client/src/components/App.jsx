@@ -14,9 +14,12 @@ const App = () => {
   const [currentSong, setCurrentSong] = useState([]);
   const [userId, setUserId] = useState(0);
 
-  const getSongs = () => {
-    return axios.get('/songs')
-      .then((response) => setSongs(response.data))
+  const getSongs = (id) => {
+    return axios.get(`/songs/${id}`)
+      .then((response) => {
+        setSongs(response.data.songs);
+        setSelectedSongs(response.data.playlistSongs);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -24,7 +27,8 @@ const App = () => {
     setCurrentSong(songs[songId]);
     if (currentSong.length !== 0) {
       let audioPlaying = document.getElementsByClassName('audio');
-      audioPlaying[0].pause().load();
+      audioPlaying[0].pause();
+      audioPlaying[0].load();
     }
   };
 
@@ -66,11 +70,13 @@ const App = () => {
     let newSongsList = songs.slice();
     newSongsList.splice(id, 1, unselectedSong);
     setSongs(newSongsList);
-  };
 
-  useEffect(() => {
-    getSongs();
-  }, []);
+    return axios.delete('/song', {data: {
+      userId: userId,
+      songId: (Number(id) + 1)
+    }})
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     if (currentSong.length !== 0) {
@@ -82,7 +88,10 @@ const App = () => {
   useEffect(() => {
     if (email !== '') {
       return axios.post('/user', {user: email})
-        .then((res) => setUserId(res.data.id))
+        .then((res) => {
+          setUserId(res.data.id);
+          getSongs(res.data.id);
+        })
         .catch((err) => console.log(err));
     }
   }, [email]);

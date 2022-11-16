@@ -46,22 +46,40 @@ db.connectAsync()
   })
   .catch((err) => console.log(err));
 
-const getSongs = () => {
+const getSongs = (userId) => {
   return db.queryAsync(`
-  SELECT * FROM songs;
+  SELECT s.id AS song_id, s.name, s.music_uri, s.image_uri, p.id
+  FROM songs s
+  LEFT JOIN playlist_songs p
+  ON p.user_id = ${userId} AND p.song_id = s.id;
   `)
     .then((data) => {
       let rows = data[0].rows;
       let songs = [];
+      let playlistSongIds = [];
       rows.forEach((row) => {
         let song = [];
         song.push(row['name']);
         song.push(row['music_uri']);
         song.push(row['image_uri']);
-        song.push(false);
+        let id = row['id'];
+        if (id !== null) {
+          playlistSongIds.push(row['song_id'] - 1);
+          song.push(true);
+        } else {
+          song.push(false);
+        }
         songs.push(song);
       });
-      return songs;
+      let playlistSongs = [];
+      for (let i = 0; i < playlistSongIds.length; i++) {
+        playlistSongs.push(songs[playlistSongIds[i]].concat(playlistSongIds[i]));
+      }
+      let results = {
+        songs: songs,
+        playlistSongs: playlistSongs
+      };
+      return results;
     })
 };
 
