@@ -5,6 +5,7 @@ const db = require('../db/index.js').db;
 const getSongs = require('../db/index.js').getSongs;
 const addUser = require('../db/index.js').addUser;
 const addSong = require('../db/index.js').addSong;
+const deleteSong = require('../db/index.js').deleteSong;
 
 const app = express();
 
@@ -32,7 +33,9 @@ app.post('/song', (req, res) => {
 });
 
 app.delete('/song', (req, res) => {
-  console.log(req.body);
+  return deleteSong(req.body)
+    .then(() => res.end())
+    .catch((err) => console.log(err));
 });
 
 app.listen(process.env.PORT, () => {

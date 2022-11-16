@@ -116,9 +116,18 @@ const addSong = ({ userId, songId }) => {
     .catch((err) => console.log(err));
 };
 
+const deleteSong = ({ userId, songId }) => {
+  return db.queryAsync(`
+  DELETE FROM playlist_songs
+  WHERE user_id = ${userId} AND song_id = ${songId}
+  `)
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   db,
   getSongs,
   addUser,
-  addSong
+  addSong,
+  deleteSong
 };
