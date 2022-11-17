@@ -24,8 +24,9 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleClickAlbum = (songId) => {
-    setCurrentSong(songs[(12 * page) + songId]);
+  const handleClickAlbum = (id) => {
+    let songId = (12 * page) + Number(id);
+    setCurrentSong(songs[songId]);
     if (currentSong.length !== 0) {
       let audioPlaying = document.getElementsByClassName('audio');
       audioPlaying[0].pause();
@@ -43,7 +44,7 @@ const App = () => {
   };
 
   const addSongToSelected = (id) => {
-    let songId = (12 * page) + id;
+    let songId = (12 * page) + Number(id);
     if (!songs[songId][3]) {
       let newSelectedSong = songs[songId].slice();
       newSelectedSong.splice(3, 1, true);
@@ -103,19 +104,15 @@ const App = () => {
     {email === '' ?
       <LogIn setEmail={setEmail}/>
       :
-      <div>
-        <div id='heading'>
-          <h1 id='title'> Animal Crossing Playlist </h1>
-          <img id='isabelle-photo' src='isabelle_jammin.jpeg' height='250px'></img>
-        </div>
-        <div id='songs-container'>
-          <SongList songs={songs} page={page} setPage={setPage} addSongToSelected={addSongToSelected} handleClickAlbum={handleClickAlbum}/>
-          <div id='right-songs-container'>
-            <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlay={handleClickPlay}/>
-            {currentSong.length !== 0 &&
-              <CurrentlyPlaying currentSong={currentSong}/>
-            }
+      <div id='songs-container'>
+        <SongList songs={songs} page={page} setPage={setPage} addSongToSelected={addSongToSelected} handleClickAlbum={handleClickAlbum}/>
+        <div id='right-songs-container'>
+          <div id='heading'>
+            <h1 id='title'> Animal Crossing Playlist </h1>
+            <img id='isabelle-photo' src='isabelle_jammin.jpeg' height='250px'></img>
           </div>
+          <CurrentlyPlaying currentSong={currentSong}/>
+          <SelectedSongList selectedSongs={selectedSongs} removeSongFromSelected={removeSongFromSelected} handleClickPlay={handleClickPlay}/>
         </div>
       </div>
     }

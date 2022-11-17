@@ -24,6 +24,7 @@ const SongList = ({ songs, page, setPage, addSongToSelected, handleClickAlbum })
       </div>
       <div id='arrow-container'>
         <i className="fa-solid fa-arrow-left" onClick={handleLeftArrowClick}></i>
+        <div> Page </div>
         <i className="fa-solid fa-arrow-right" onClick={handleRightArrowClick}></i>
       </div>
     </div>

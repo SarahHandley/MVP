@@ -100,22 +100,27 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1400px;
-  margin-top: 50px;
-  margin-bottom: 15px;
+  width: 500px;
+  margin: 0 0 15px 15px;
 }
 
 #title {
-  font-size: 80px;
+  font-size: 45px;
   margin: 20px;
 }
 
 #isabelle-photo {
-  margin: 20px;
+  margin: 10px;
 }
 
+
+
+/**
+* All Songs
+*/
 #songs-container {
   display: flex;
+  margin-top: 15px;
 }
 
 .song-list-container {
@@ -125,13 +130,14 @@ h6 {
 }
 
 .subtitle {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 #song-list {
   display: flex;
   flex-wrap: wrap;
   width: 885px;
+  margin-top: 25px;
 }
 
 .song {
@@ -161,25 +167,48 @@ h6 {
   margin-bottom: 0;
 }
 
-#add-songs-notice {
+#arrow-container {
+  display: flex;
+  transform: translate(700px, 20px);
+}
+
+#arrow-container i {
+  margin: 7.5px 10px;
+}
+
+#arrow-container div {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+
+
+/**
+* Playlist
+*/
+#add-songs-notice,
+#play-song-notice {
   display: flex;
   justify-content: center;
   font-size: 25px;
-  margin-top: 55px;
+  font-weight: 600;
+  margin-top: 40px;
 }
 
 .selected-songs-container {
   background-color: #1E212D;
   padding: 35px;
-  margin-left: 15px;
   width: 500px;
-  min-height: 500px;
+  height: 400px;
   align-self: flex-start;
+  margin-left: 15px;
 }
 
 #selected-song-list {
   display: flex;
   flex-direction: column;
+  max-height: 275px;
+  overflow-y: scroll;
 }
 
 .selected-song {
@@ -218,36 +247,41 @@ h6 {
   margin-top: 18px;
 }
 
+
+/**
+* Currently Playing
+*/
 #audio-player-container {
-  height: 550px;
+  height: 200px;
   width: 500px;
   background-color: #1E212D;
-  padding: 35px;
   margin-left: 15px;
-  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
 }
 
 #audio-player {
   background-color: #111219;
-  margin-top: 15px;
-  padding: 20px;
-}
-
-#audio-header {
+  padding: 10px;
   display: flex;
 }
 
-#audio-header img {
-  margin: 20px 20px 20px 0;
+#audio-player img {
+  margin-right: 15px;
 }
 
-#audio-header div {
-  margin: 120px 20px 20px 20px;
+#music {
+  display: flex;
+  flex-direction: column;
+}
+
+#music div {
   font-size: 20px;
   font-weight: 600;
+  margin: 30px 20px;
 }
 
 .audio {
-  margin: 10px;
-  width: 370px;
+  margin: 0px;
+  width: 270px;
 }
